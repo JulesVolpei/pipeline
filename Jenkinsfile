@@ -21,7 +21,7 @@ pipeline {
                 sh 'docker image tag $DOCKER_HUB_REPO:latest $DOCKER_HUB_REPO:$BUILD_NUMBER'
 
                 //  Pushing Image to Repository
-                withCredentials([usernamePassword(credentialsId: "dockeraccount", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                withCredentials([usernamePassword(credentialsId: "dockeraccount", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')])
                 sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
                 sh "docker push $DOCKER_HUB_REPO:$BUILD_NUMBER"
                 sh "docker push $DOCKER_HUB_REPO:latest"

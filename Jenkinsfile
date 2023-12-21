@@ -22,12 +22,12 @@ pipeline {
 
                 //  Pushing Image to Repository
                 echo "Connexion ..."
-                withCredentials([usernamePassword(credentialsId: "dockerhubidentifiants", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')])
-                sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
-                sh "docker push $DOCKER_HUB_REPO:$BUILD_NUMBER"
-                sh "docker push $DOCKER_HUB_REPO:latest"
-                sh "docker logout"
-                
+                withCredentials([usernamePassword(credentialsId: "dockerhubidentifiants", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                    sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
+                    sh "docker push $DOCKER_HUB_REPO:$BUILD_NUMBER"
+                    sh "docker push $DOCKER_HUB_REPO:latest"
+                    sh "docker logout"
+                }
                 echo "Image built and pushed to repository"
             }
         }
